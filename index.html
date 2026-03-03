@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マンドリン奏者 松浦圭介 | 名古屋・レッスン・演奏依頼</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: ゴシック体とロゴ用英字フォントを読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-dark': '#111111',   /* より深い黒 */
+                        'brand-light': '#FFFFFF',  /* ピュアな白 */
+                        'brand-gray': '#F5F5F5',   /* 薄いグレー */
+                        'brand-accent': '#000000', /* アクセントも黒 */
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        logo: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* カスタムアニメーション用クラス */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        .hero-bg {
+            background-color: #111;
+            
+            /* ======================================================
+             【背景画像の設定・差し替え方法】
+             現在は仮のマンドリン（弦楽器）の画像URLを設定しています。
+             
+             ご自身の画像を使用する場合は、このHTMLファイルと同じ場所に
+             「mandolin-bg.jpg」という名前で画像を配置してください。
+             その後、下の url('...') の中身を url('./mandolin-bg.jpg') に書き換えます。
+             ======================================================
+            */
+            background-image: linear-gradient(rgba(17, 17, 17, 0.75), rgba(17, 17, 17, 0.75)), url('https://images.unsplash.com/photo-1510915361894-faa8b2bcde25?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-blend-mode: luminosity; /* 画像をモノクロ化して馴染ませる */
+        }
+    </style>
+</head>
+<body class="font-sans text-brand-dark bg-brand-light antialiased tracking-wide">
+
+    <!-- ヘッダー・ナビゲーション -->
+    <header id="header" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- NAGOYA MANDOLINIST ロゴ -->
+            <a href="#" class="flex flex-col items-start hover:opacity-80 transition group font-logo">
+                <span class="text-xs md:text-sm tracking-[0.5em] text-gray-300 font-light mb-1 group-hover:text-white transition uppercase pl-1">Nagoya</span>
+                <span class="text-xl md:text-2xl font-bold text-white tracking-[0.2em] uppercase leading-none">Mandolinist</span>
+            </a>
+            
+            <!-- デスクトップメニュー -->
+            <nav class="hidden md:flex space-x-10 items-center">
+                <a href="#profile" class="text-white hover:text-gray-400 transition text-sm tracking-widest uppercase">Profile</a>
+                <a href="#lessons" class="text-white hover:text-gray-400 transition text-sm tracking-widest uppercase">Lessons</a>
+                <a href="#performance" class="text-white hover:text-gray-400 transition text-sm tracking-widest uppercase">Performance</a>
+                <a href="#contact" class="px-6 py-2 bg-[rgba(255,255,255,0.1)] border border-[rgba(255,255,255,0.3)] text-white text-sm tracking-widest uppercase hover:bg-white hover:text-black rounded-md transition shadow-sm">Contact</a>
+            </nav>
+
+            <!-- モバイルメニューボタン -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- モバイルメニュー -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark bg-opacity-95 absolute w-full left-0 top-full flex flex-col items-center py-8 space-y-6 shadow-lg border-t border-gray-800">
+            <a href="#profile" class="mobile-link text-white text-sm tracking-widest uppercase">Profile</a>
+            <a href="#lessons" class="mobile-link text-white text-sm tracking-widest uppercase">Lessons</a>
+            <a href="#performance" class="mobile-link text-white text-sm tracking-widest uppercase">Performance</a>
+            <a href="#contact" class="mobile-link px-8 py-3 mt-4 bg-white text-black rounded-md text-sm tracking-widest uppercase">Contact</a>
+        </div>
+    </header>
+
+    <!-- 0. ヒーローセクション -->
+    <section id="hero" class="hero-bg h-screen flex items-center justify-center relative">
+        <div class="container mx-auto px-6 text-center z-10 fade-in-up">
+            <p class="text-gray-300 text-sm md:text-base mb-6 tracking-[0.3em] font-light">名古屋・東海エリアを中心に活動</p>
+            <h1 class="text-white text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-10 tracking-widest">
+                あなたの心に、<br>
+                マンドリンの響きを。
+            </h1>
+            <p class="text-gray-300 text-sm md:text-base lg:text-lg mb-12 max-w-3xl mx-auto leading-loose font-light tracking-widest">
+                フリーランスのマンドリン演奏家・指導者の松浦圭介による、<br class="hidden md:block">
+                心揺さぶる生の演奏や、一人ひとりに寄り添う丁寧なレッスンをお届けします。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-5 sm:space-y-0 sm:space-x-6">
+                <a href="#lessons" class="w-64 sm:w-auto px-10 py-4 bg-[#f4f4f4] text-black font-bold tracking-widest text-sm rounded-md shadow-md hover:bg-white hover:shadow-lg transform transition hover:-translate-y-0.5">レッスンについて</a>
+                <a href="#performance" class="w-64 sm:w-auto px-10 py-4 bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.4)] text-white font-bold tracking-widest text-sm rounded-md shadow-sm hover:bg-[rgba(255,255,255,0.15)] hover:shadow-lg transform transition hover:-translate-y-0.5">演奏依頼について</a>
+            </div>
+        </div>
+        
+        <!-- スクロールダウンインジケーター -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#profile" class="text-white opacity-50 hover:opacity-100 transition">
+                <i class="fas fa-arrow-down text-xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 1. プロフィールセクション -->
+    <section id="profile" class="py-32 bg-brand-light">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-20 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4 tracking-[0.2em] uppercase font-logo">Profile</h2>
+                <div class="h-px w-12 bg-black mx-auto"></div>
+                <p class="mt-4 text-gray-500 tracking-widest text-xs">プロフィール</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-16">
+                <!-- プロフィール画像 -->
+                <div class="w-48 h-48 md:w-56 md:h-56 flex-shrink-0 fade-in-up">
+                    <!-- ======================================================
+                         【プロフィール画像の設定・差し替え方法】
+                         現在は仮の人物写真を設定しています。
+                         
+                         ご自身の画像を使用する場合は、このHTMLファイルと同じ場所に
+                         「profile.jpg」などの名前で画像を配置してください。
+                         その後、下の src="..." の中身を src="./profile.jpg" に書き換えます。
+                         ====================================================== -->
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1287&auto=format&fit=crop" alt="松浦圭介 プロフィール写真" class="w-full h-full object-cover rounded-full shadow-sm border border-gray-200 p-1">
+                </div>
+
+                <div class="flex-1 fade-in-up" style="transition-delay: 0.2s;">
+                    <h3 class="text-xl font-bold mb-8 text-brand-dark tracking-widest border-b border-gray-200 pb-4">マンドリン演奏家／指導者　松浦圭介</h3>
+                    <div class="space-y-6 text-gray-700 leading-loose text-sm font-light tracking-wide">
+                        <p>愛知県一宮市出身。九州大学在学中にマンドリンと出会い、その魅力に惹き込まれる。</p>
+                        <p>第24回 中部マンドリン独奏コンクール第1位、第24回 日本マンドリン独奏コンクール本選入選をはじめ、数々の独奏コンクールに出場し実績を残す。</p>
+                        <p>多数のマンドリンオーケストラで指揮者やコンサートマスターを歴任する傍ら、独奏やアンサンブルを中心とした演奏活動を全国各地で展開。2014年からは自身の合奏・アンサンブル団体を主宰している。</p>
+                        <p>近年ではフリーランスの演奏家として、弦楽、声楽、吹奏楽など、ジャンルの垣根を越えた多様な分野との共演を果たしている。また、愛知県内を中心に学生指導や個別指導にも情熱を注ぐ。</p>
+                        <p class="mt-4">木下正紀氏に師事。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. レッスン概要セクション -->
+    <section id="lessons" class="py-32 bg-brand-gray">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-20 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4 tracking-[0.2em] uppercase font-logo">Lessons</h2>
+                <div class="h-px w-12 bg-black mx-auto"></div>
+                <p class="mt-4 text-gray-500 tracking-widest text-xs">レッスン概要</p>
+            </div>
+
+            <!-- コンセプト -->
+            <div class="bg-white p-10 md:p-12 mb-16 fade-in-up border border-gray-100 shadow-sm rounded-md">
+                <p class="text-gray-800 leading-loose text-left max-w-3xl mx-auto font-light tracking-wide text-sm md:text-base mb-4">
+                    再現性が高い合理的な奏法や音楽表現をベースに、生徒様一人ひとりを見つめながら、<br class="hidden md:block">マンドリンを奏でる楽しさを心から体感していただくことを目指しています。
+                </p>
+                <p class="text-gray-800 leading-loose text-left max-w-3xl mx-auto font-light tracking-wide text-sm md:text-base">
+                    ご興味がありましたら、ぜひお気軽にお声がけください。
+                </p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-16">
+                <!-- 料金表 -->
+                <div class="flex-1 fade-in-up">
+                    <h3 class="text-lg font-bold mb-6 tracking-widest uppercase border-b border-black pb-2 font-logo">Course & Fee</h3>
+                    <p class="text-xs text-gray-500 mb-6 tracking-widest">※1回50分 / 税別価格</p>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b-2 border-black text-brand-dark">
+                                    <th class="py-3 px-2 font-bold tracking-widest text-sm">頻度</th>
+                                    <th class="py-3 px-2 font-bold tracking-widest text-sm">受講料（月額）</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-800 font-light text-sm">
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-6 px-2 tracking-widest">月1回コース</td>
+                                    <td class="py-6 px-2 font-bold text-lg">5,000<span class="text-xs font-light text-gray-500 ml-1">円</span></td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-6 px-2 tracking-widest">月2回コース</td>
+                                    <td class="py-6 px-2 font-bold text-lg">9,000<span class="text-xs font-light text-gray-500 ml-1">円</span></td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-6 px-2 tracking-widest">スポット・合奏等</td>
+                                    <td class="py-6 px-2">要相談</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <p class="mt-6 text-xs text-gray-600 leading-relaxed tracking-wide">
+                        業界標準と比較しても非常にリーズナブルな価格設定にしております。より多くの方にマンドリンを楽しんでいただけることを願っています。
+                    </p>
+                </div>
+
+                <!-- 詳細情報 -->
+                <div class="flex-1 fade-in-up" style="transition-delay: 0.2s;">
+                    <h3 class="text-lg font-bold mb-6 tracking-widest uppercase border-b border-black pb-2 font-logo">Information</h3>
+                    
+                    <ul class="space-y-8 mt-6">
+                        <li>
+                            <h4 class="font-bold text-sm tracking-widest mb-2">学生割引</h4>
+                            <p class="text-gray-600 text-sm font-light tracking-wide">学生の方は、上記受講料の<strong>60%</strong>の価格で受講いただけます。</p>
+                        </li>
+                        <li>
+                            <h4 class="font-bold text-sm tracking-widest mb-2">レッスン会場</h4>
+                            <p class="text-gray-600 text-sm font-light tracking-wide leading-relaxed">講師自宅（名古屋市昭和区）にて行います。<br><span class="text-xs text-gray-500">※詳細な住所は初回お申し込み時にお伝えします。</span></p>
+                        </li>
+                        <li>
+                            <h4 class="font-bold text-sm tracking-widest mb-2">体験レッスン</h4>
+                            <p class="text-gray-600 text-sm font-light tracking-wide">まずは雰囲気を知りたい方へ。<br>1回 <strong>2,000円</strong></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center mt-20 fade-in-up">
+                <a href="#contact" class="inline-block px-12 py-4 bg-[#222] border border-[#333] text-white font-bold tracking-widest text-sm rounded-md shadow-md hover:bg-[#3a3a3a] hover:shadow-lg transform transition hover:-translate-y-0.5">体験レッスンを申し込む</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 演奏依頼セクション -->
+    <section id="performance" class="py-32 bg-brand-light">
+        <div class="container mx-auto px-6 max-w-3xl text-center">
+            <div class="mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4 tracking-[0.2em] uppercase font-logo">Performance</h2>
+                <div class="h-px w-12 bg-black mx-auto"></div>
+                <p class="mt-4 text-gray-500 tracking-widest text-xs">演奏依頼について</p>
+            </div>
+
+            <div class="fade-in-up">
+                <h3 class="text-xl md:text-2xl font-bold mb-10 text-brand-dark tracking-widest">あらゆるシーンに、生演奏の彩りを。</h3>
+                
+                <!-- 段落を分けて中途半端な改行を防ぐ (brタグで強制改行) -->
+                <div class="max-w-2xl mx-auto text-left">
+                    <p class="text-gray-700 leading-loose mb-10 font-light tracking-wide text-sm md:text-base">
+                        愛知県付近を中心に、イベント、施設での演奏、他楽器・団体の賛助出演など、<br>
+                        ジャンルを問わず幅広く演奏依頼をお受けしております。<br>
+                        クラシックからポピュラーまで、ご希望に合わせた柔軟な対応が可能です。<br>
+                        どうぞお気軽にご相談ください。
+                    </p>
+                </div>
+                
+                <div class="p-8 border border-gray-200 bg-brand-gray text-left md:text-center rounded-md">
+                    <h4 class="font-bold text-brand-dark mb-4 tracking-widest text-sm uppercase font-logo">Cost / 費用感について</h4>
+                    <p class="text-gray-600 text-sm font-light leading-relaxed">
+                        演奏時間、拘束時間、編成、曲目など、ご依頼内容により変動いたします。<br>
+                        ご予算に合わせたご提案も可能ですので、まずは都度ご相談させてください。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. お問い合わせフォームセクション -->
+    <section id="contact" class="py-32 bg-brand-dark text-white">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-[0.2em] uppercase font-logo">Contact</h2>
+                <div class="h-px w-12 bg-gray-500 mx-auto"></div>
+                <p class="mt-4 text-gray-400 tracking-widest text-xs">お問い合わせ・ご依頼</p>
+                <p class="mt-8 text-gray-300 font-light tracking-wide text-sm">レッスンのお申し込みや演奏のご依頼など、<br class="md:hidden">お気軽にご連絡ください。</p>
+            </div>
+
+            <div class="fade-in-up">
+                <!-- 送信成功メッセージ -->
+                <div id="formSuccess" class="hidden mb-8 p-4 border border-white text-white text-center tracking-widest text-sm rounded-md">
+                    メッセージを送信しました。折り返しご連絡いたします。
+                </div>
+
+                <form id="contactForm" class="space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <label for="name" class="block text-xs font-bold text-gray-300 mb-3 tracking-widest font-logo">NAME <span class="text-red-400 ml-1">*</span></label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-transparent border-b border-gray-600 focus:outline-none focus:border-white transition rounded-none text-white font-light">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-xs font-bold text-gray-300 mb-3 tracking-widest font-logo">EMAIL ADDRESS <span class="text-red-400 ml-1">*</span></label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-transparent border-b border-gray-600 focus:outline-none focus:border-white transition rounded-none text-white font-light">
+                            <p class="text-[10px] text-gray-500 mt-2 tracking-widest font-light">※折り返しのご連絡に使用いたします。</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="type" class="block text-xs font-bold text-gray-300 mb-3 tracking-widest font-logo">SUBJECT <span class="text-red-400 ml-1">*</span></label>
+                        <select id="type" name="type" required class="w-full px-4 py-3 bg-brand-dark border-b border-gray-600 focus:outline-none focus:border-white transition rounded-none text-white font-light appearance-none">
+                            <option value="" disabled selected>選択してください</option>
+                            <option value="【レッスン依頼】体験レッスン希望">【レッスン依頼】体験レッスン希望</option>
+                            <option value="【レッスン依頼】その他（入会・質問など）">【レッスン依頼】その他（入会・質問など）</option>
+                            <option value="【演奏依頼】イベント・コンサート等">【演奏依頼】イベント・コンサート等</option>
+                            <option value="【その他】ご質問・ご相談など">【その他】ご質問・ご相談など</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-xs font-bold text-gray-300 mb-3 tracking-widest font-logo">MESSAGE <span class="text-red-400 ml-1">*</span></label>
+                        <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 bg-transparent border border-gray-600 focus:outline-none focus:border-white transition rounded-md text-white font-light resize-none mt-2"></textarea>
+                    </div>
+
+                    <div class="text-center pt-8">
+                        <button type="submit" id="submitBtn" class="w-full md:w-auto px-16 py-4 bg-[#f4f4f4] text-black font-bold tracking-widest text-sm rounded-md shadow-md hover:bg-white hover:shadow-lg transform transition hover:-translate-y-0.5 font-logo">
+                            <span>SEND MESSAGE</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ヘッダーのスクロール時の背景色変更
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.remove('bg-transparent', 'py-4');
+                    header.classList.add('bg-brand-dark', 'bg-opacity-95', 'py-3', 'border-b', 'border-gray-800');
+                } else {
+                    header.classList.add('bg-transparent', 'py-4');
+                    header.classList.remove('bg-brand-dark', 'bg-opacity-95', 'py-3', 'border-b', 'border-gray-800');
+                }
+            });
+
+            // モバイルメニューの開閉
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                if(mobileMenu.classList.contains('hidden')){
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                });
+            });
+
+            // スクロール時のフェードインアニメーション
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
+            });
+
+            // フォーム送信処理 (Google Apps Script連携用)
+            const contactForm = document.getElementById('contactForm');
+            if(contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const btn = document.getElementById('submitBtn');
+                    const btnText = btn.querySelector('span');
+                    const originalText = btnText.innerText;
+                    
+                    // ボタンをローディング状態に
+                    btnText.innerText = 'SENDING...';
+                    btn.classList.add('opacity-50', 'cursor-not-allowed');
+                    btn.disabled = true;
+
+                    // フォームデータの取得
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        type: document.getElementById('type').value,
+                        message: document.getElementById('message').value
+                    };
+
+                    // ★★★ 重要：ここにGASのWebアプリURLを貼り付けます ★★★
+                    const GAS_URL = ''; 
+
+                    try {
+                        if (!GAS_URL) {
+                            // デモ用処理
+                            await new Promise(resolve => setTimeout(resolve, 1500));
+                            console.log('送信データ:', formData);
+                            alert('【デモ動作】\nデータは送信されませんでした。\n実際の運用にはGAS（Google Apps Script）の設定が必要です。');
+                        } else {
+                            // 実際の送信処理
+                            const response = await fetch(GAS_URL, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(formData)
+                            });
+
+                            if (!response.ok) {
+                                throw new Error('ネットワークエラー');
+                            }
+                        }
+
+                        // 成功時のUI更新
+                        contactForm.reset();
+                        const successMsg = document.getElementById('formSuccess');
+                        successMsg.classList.remove('hidden');
+                        
+                        setTimeout(() => {
+                            successMsg.classList.add('hidden');
+                        }, 5000);
+
+                    } catch (error) {
+                        console.error('送信エラー:', error);
+                        alert('送信に失敗しました。');
+                    } finally {
+                        btnText.innerText = originalText;
+                        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                        btn.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
